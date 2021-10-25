@@ -1,0 +1,16 @@
+{
+    "search":{
+        "hint_text":"Search for albums"
+    },
+    "error":{
+        "try_again":"Try again",
+        "message":"Somthin wrong happens!"
+    },
+    "albums":{
+        "title":"{} Top Albums",
+        "tracks":"Tracks"
+    },
+    "home":{
+        "no_albums_added":"No Albums added yet"
+    }
+}

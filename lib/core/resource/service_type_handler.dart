@@ -1,0 +1,1 @@
+class ServiceTypeHandler<T> {}
