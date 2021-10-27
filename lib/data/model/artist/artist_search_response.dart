@@ -57,23 +57,20 @@ class ArtistModel extends HiveObject implements Artist {
     return artist != null ? _$ArtistModelToJson(artist as ArtistModel) : {};
   }
 
-  @HiveField(0)
   @override
   String? listeners;
 
-  @HiveField(1)
+  @HiveField(0)
   @override
   String? mbid;
 
-  @HiveField(2)
+  @HiveField(1)
   @override
   String? name;
 
-  @HiveField(3)
   @override
   String? streamable;
 
-  @HiveField(4)
   @override
   String? url;
 

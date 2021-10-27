@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/core/state/state_types.dart';
 import 'package:music_app/core/utils.dart';
 import 'package:music_app/generated/app_text.dart';
+import 'package:music_app/presentation/widgets/space.dart';
 
 // ignore: must_be_immutable
 class AppStateWidget<T> extends StatelessWidget {
@@ -56,9 +57,7 @@ class AppErrorState extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(tr('error.message')),
-          const SizedBox(
-            height: 5,
-          ),
+          const VerticalSpace(5),
           ElevatedButton(
             onPressed: () {
               onRetry?.call();

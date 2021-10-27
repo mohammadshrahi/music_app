@@ -20,7 +20,8 @@ class CodegenLoader extends AssetLoader{
   },
   "error": {
     "try_again": "Try again",
-    "message": "Somthin wrong happens!"
+    "message": "Somthin wrong happens!",
+    "unable_save_album": "Sorry! we are unable to save your album {}"
   },
   "albums": {
     "title": "{} Top Albums",
@@ -28,6 +29,10 @@ class CodegenLoader extends AssetLoader{
   },
   "home": {
     "no_albums_added": "No Albums added yet"
+  },
+  "details": {
+    "artist": "Artist",
+    "album": "Album"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};

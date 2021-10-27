@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:music_app/data/model/album/get_album_tracks_response.dart';
 import 'package:music_app/data/model/artist/artist_search_response.dart';
@@ -27,7 +28,7 @@ class TopAlbums {
 
 @JsonSerializable()
 @HiveType(typeId: 0)
-class AlbumModel extends HiveObject implements Album {
+class AlbumModel extends HiveObject implements Album, Equatable {
   AlbumModel(
       {this.artist,
       this.image,
@@ -36,6 +37,7 @@ class AlbumModel extends HiveObject implements Album {
       this.playcount,
       this.url,
       this.tracks,
+      this.isFavorite,
       this.albumImage});
   // @HiveField(7)
   @JsonKey(ignore: true)

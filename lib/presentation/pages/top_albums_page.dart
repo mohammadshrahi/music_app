@@ -39,10 +39,22 @@ class _TopAlbumPageState extends State<TopAlbumPage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: Container(
+      body: BlocListener<FavoriteAlbumsBloc, FavoriteAlbumsState>(
+        listener: (context, state) {
+          if (state is FavoriteAlbumsSuccessState) {
+            if (state.saveFailed ?? false) {
+              BlocProvider.of<TopAlbumsBloc>(context)
+                  .getTopAlbumsEvent(artist!);
+            }
+          }
+        },
         child: BlocBuilder<TopAlbumsBloc, TopAlbumsState>(
           builder: (context, state) {
             return AppStateWidget(
+                onRetry: () {
+                  BlocProvider.of<TopAlbumsBloc>(context)
+                      .getTopAlbumsEvent(artist!);
+                },
                 builder: (state, context) {
                   if (state is TopAlbumsSuccessState) {
                     return _buildBody(state.successResource.data);

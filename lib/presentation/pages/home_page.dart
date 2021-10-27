@@ -54,8 +54,9 @@ class _HomePageState extends State<HomePage> {
                                 'home.no_albums_added',
                               ),
                               style: Theme.of(context).textTheme.headline1));
-                    } else
+                    } else {
                       return _buildBody(state.albums);
+                    }
                   }
                 },
                 state: state);

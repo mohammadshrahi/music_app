@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:music_app/domin/entities/track.dart';
 part 'get_album_tracks_response.g.dart';
@@ -28,16 +29,18 @@ class TraksHolder {
 }
 
 @JsonSerializable()
+@HiveType(typeId: 33)
 class TrackModel implements Track {
   TrackModel({this.duration, this.name, this.url});
   factory TrackModel.fromJson(Map<String, dynamic> json) =>
       _$TrackModelFromJson(json);
+  @HiveField(0)
   @override
   int? duration;
-
+  @HiveField(1)
   @override
   String? name;
-
+  @HiveField(2)
   @override
   String? url;
 }

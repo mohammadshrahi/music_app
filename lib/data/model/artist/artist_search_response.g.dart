@@ -17,28 +17,19 @@ class ArtistModelAdapter extends TypeAdapter<ArtistModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ArtistModel(
-      listeners: fields[0] as String?,
-      mbid: fields[1] as String?,
-      name: fields[2] as String?,
-      streamable: fields[3] as String?,
-      url: fields[4] as String?,
+      mbid: fields[0] as String?,
+      name: fields[1] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ArtistModel obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.listeners)
-      ..writeByte(1)
-      ..write(obj.mbid)
       ..writeByte(2)
-      ..write(obj.name)
-      ..writeByte(3)
-      ..write(obj.streamable)
-      ..writeByte(4)
-      ..write(obj.url);
+      ..writeByte(0)
+      ..write(obj.mbid)
+      ..writeByte(1)
+      ..write(obj.name);
   }
 
   @override

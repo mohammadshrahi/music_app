@@ -7,6 +7,8 @@ import 'package:injectable/injectable.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:music_app/core/routes/routes.dart';
 import 'package:music_app/core/utils.dart';
+import 'package:music_app/data/model/album/get_album_tracks_response.dart';
+import 'package:music_app/data/model/artist/artist_search_response.dart';
 import 'package:music_app/domin/entities/artist.dart';
 import 'package:music_app/domin/entities/track.dart';
 import 'package:music_app/injection.dart';
@@ -24,8 +26,8 @@ void main() async {
 
   Hive.init(dir?.path ?? '');
   Hive.registerAdapter<AlbumModel>(AlbumModelAdapter());
-  Hive.registerAdapter<Artist>(ArtistAdapter());
-  Hive.registerAdapter<Track>(TrackAdapter());
+  Hive.registerAdapter<ArtistModel>(ArtistModelAdapter());
+  Hive.registerAdapter<TrackModel>(TrackModelAdapter());
 
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(

@@ -64,6 +64,7 @@ dev_dependencies:
   favorite_button: ^0.0.4
   cached_network_image: ^3.1.0
   hive_generator: ^1.1.1
+  fluttertoast: ^8.0.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -34,13 +34,10 @@ class ArtistRepositoryImpl implements ArtistRepository {
     Resource resource = await HttpResponseHandler<GetTopAlbumsResponse>()
         .handle(musicService.getTopAlbums(artist.mbid!));
     if (resource is SuccessResource<GetTopAlbumsResponse>) {
-      var box = await appDataBase.getAlbumBox();
+      List<AlbumModel> list = await appDataBase.getFavoritesAlbums();
       resource.data.topAlbums?.album?.forEach((album) {
-        album.isFavorite = box.values
-            .toList()
-            .cast<AlbumModel>()
-            .where((element) => element.mbid == album.mbid)
-            .isNotEmpty;
+        album.isFavorite =
+            list.where((element) => element.mbid == album.mbid).isNotEmpty;
       });
       return SuccessResource<List<Album>>(resource.data.topAlbums?.album ?? []);
     } else {

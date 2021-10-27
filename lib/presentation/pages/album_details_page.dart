@@ -5,8 +5,10 @@ import 'package:music_app/core/utils.dart';
 import 'package:music_app/domin/entities/album.dart';
 import 'package:music_app/generated/app_text.dart';
 import 'package:music_app/presentation/blocs/tracks/bloc/tracks_bloc.dart';
+import 'package:music_app/presentation/widgets/space.dart';
 import 'package:music_app/presentation/widgets/state_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:music_app/presentation/widgets/tite_description_widget.dart';
 
 class AlbumDetailsPage extends StatefulWidget {
   AlbumDetailsPage({Key? key}) : super(key: key);
@@ -44,32 +46,39 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
                     children: [
                       _buildDetails(state.album),
                       state.album.tracks != null
-                          ? const SizedBox(
-                              height: 10,
-                            )
+                          ? const VerticalSpace(10)
                           : Container(),
                       state.album.tracks != null
                           ? Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                tr('albums.tracks'),
-                                style: Theme.of(context).textTheme.headline2,
+                                '${album?.name ?? ''} ${tr('albums.tracks')}:',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    ?.copyWith(
+                                        color: AppConst.kAppSecondaryColor,
+                                        fontSize: 18),
                               ),
                             )
                           : Container(),
                       state.album.tracks != null
-                          ? const SizedBox(
-                              height: 10,
-                            )
+                          ? const VerticalSpace(10)
                           : Container(),
-                      if (state.album.tracks != null)
-                        ...(state.album.tracks
-                                ?.map((e) => Padding(
-                                      padding: EdgeInsets.all(15),
-                                      child: Text(e.name ?? ''),
-                                    ))
-                                .toList() ??
-                            []),
+                      ...(List.generate(
+                          state.album.tracks?.length ?? 0,
+                          (index) => Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Text(
+                                    '${index + 1}-${state.album.tracks?[index].name ?? ''}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.copyWith(
+                                            color: AppConst.kAppSecondaryColor
+                                                .withOpacity(0.7),
+                                            fontSize: 18)),
+                              )))
                     ],
                   ),
                 );
@@ -92,24 +101,20 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
         ),
-        const SizedBox(
-          height: 5,
-        ),
+        const VerticalSpace(5),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            album.name ?? '',
-            style: Theme.of(context).textTheme.headline2,
+          child: TitleDescriptionWidget(
+            title: tr('details.album'),
+            body: album.name,
           ),
         ),
-        const SizedBox(
-          height: 5,
-        ),
+        const VerticalSpace(5),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            album.artist?.name ?? '',
-            style: Theme.of(context).textTheme.headline2,
+          child: TitleDescriptionWidget(
+            title: tr('details.artist'),
+            body: album.artist?.name,
           ),
         )
       ],
@@ -126,9 +131,7 @@ class _AlbumDetailsPageState extends State<AlbumDetailsPage> {
             );
           },
           separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 5,
-            );
+            return const VerticalSpace(5);
           },
           itemCount: album.tracks?.length ?? 0),
     );

@@ -8,6 +8,7 @@ abstract class TopAlbumsEvent extends Equatable {
 }
 
 class TopAlbumsGetEvent extends TopAlbumsEvent {
-  TopAlbumsGetEvent(this.artist);
+  TopAlbumsGetEvent(this.artist, {this.withLoading = true});
   Artist artist;
+  bool withLoading;
 }

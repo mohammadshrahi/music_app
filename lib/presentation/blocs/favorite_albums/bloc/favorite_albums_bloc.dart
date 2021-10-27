@@ -9,6 +9,8 @@ import 'package:music_app/domin/entities/album.dart';
 import 'package:music_app/domin/usecases/favorite_albums/add_album_to_favorite_list.dart';
 import 'package:music_app/domin/usecases/favorite_albums/delete_album_from_favorite_list.dart';
 import 'package:music_app/domin/usecases/favorite_albums/get_favorite_albums.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:music_app/generated/app_text.dart';
 
 part 'favorite_albums_event.dart';
 part 'favorite_albums_state.dart';
@@ -36,7 +38,16 @@ class FavoriteAlbumsBloc
   Future<void> _favoriteAlbumsAddEvent(FavoriteAlbumsAddEvent event) async {
     Resource resource =
         await addAlbumFromFavoriteList.call(params: event.album);
-    await _favoriteAlbumsGetEvent();
+    if (resource is FailedResource) {
+      event.album.isFavorite = false;
+      if (state is FavoriteAlbumsSuccessState) {
+        emit((state as FavoriteAlbumsSuccessState).copyWith(saveFailed: true));
+      }
+      Fluttertoast.showToast(
+          msg: tr('error.unable_save_album', args: [event.album.name ?? '']));
+    } else {
+      await _favoriteAlbumsGetEvent();
+    }
   }
 
   Future<void> _favoriteAlbumsDeleteEvent(

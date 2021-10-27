@@ -14,7 +14,7 @@ class TopAlbumsBloc extends Bloc<TopAlbumsEvent, TopAlbumsState> {
   TopAlbumsBloc(this.getTopAlbums) : super(TopAlbumsInitial()) {
     on<TopAlbumsEvent>((event, emit) async {
       if (event is TopAlbumsGetEvent) {
-        emit(TopAlbumsLoadingState());
+        if (event.withLoading) emit(TopAlbumsLoadingState());
         Resource resource = await getTopAlbums.call(params: event.artist);
         if (resource is SuccessResource<List<Album>>) {
           emit(TopAlbumsSuccessState(resource));
@@ -24,7 +24,7 @@ class TopAlbumsBloc extends Bloc<TopAlbumsEvent, TopAlbumsState> {
       }
     });
   }
-  void getTopAlbumsEvent(Artist artist) {
-    add(TopAlbumsGetEvent(artist));
+  void getTopAlbumsEvent(Artist artist, {bool withLoading = true}) {
+    add(TopAlbumsGetEvent(artist, withLoading: withLoading));
   }
 }
