@@ -41,10 +41,9 @@ class FavoriteAlbumsBloc
     if (resource is FailedResource) {
       event.album.isFavorite = false;
       if (state is FavoriteAlbumsSuccessState) {
-        emit((state as FavoriteAlbumsSuccessState).copyWith(saveFailed: true));
+        emit((state as FavoriteAlbumsSuccessState)
+            .copyWith(saveFailed: true, album: event.album));
       }
-      Fluttertoast.showToast(
-          msg: tr('error.unable_save_album', args: [event.album.name ?? '']));
     } else {
       await _favoriteAlbumsGetEvent();
     }

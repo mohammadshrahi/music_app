@@ -40,9 +40,10 @@ class AppLoadingState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
+        key: ValueKey('AppLoadingState'),
         child: CircularProgressIndicator(
-      color: AppConst.kAppSecondaryColor,
-    ));
+          color: AppConst.kAppSecondaryColor,
+        ));
   }
 }
 

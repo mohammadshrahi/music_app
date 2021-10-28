@@ -31,7 +31,7 @@ void main() async {
 
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
-      assetLoader: CodegenLoader(),
+      assetLoader: const CodegenLoader(),
       path: './assets/translations/',
       fallbackLocale: AppConst.kSupportedLocals.first,
       supportedLocales: AppConst.kSupportedLocals,

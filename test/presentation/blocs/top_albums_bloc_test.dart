@@ -42,5 +42,12 @@ main() {
         act: (TopAlbumsBloc bloc) =>
             bloc.getTopAlbumsEvent(artist, withLoading: false),
         expect: () => [isA<TopAlbumsSuccessState>()]);
+    blocTest('Success State without loading when requset top Albums',
+        build: () => TopAlbumsBloc(getTopAlbums),
+        seed: () =>
+            TopAlbumsSuccessState(SuccessResource([])) as TopAlbumsState,
+        act: (TopAlbumsBloc bloc) =>
+            bloc.getTopAlbumsEvent(artist, withLoading: false),
+        expect: () => [isA<TopAlbumsSuccessState>()]);
   });
 }

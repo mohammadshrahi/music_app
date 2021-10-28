@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_app/core/routes/routes.dart';
 import 'package:music_app/core/utils.dart';
+import 'package:music_app/data/model/artist/artist_search_response.dart';
 import 'package:music_app/domin/entities/album.dart';
 import 'package:music_app/domin/entities/artist.dart';
 import 'package:music_app/generated/app_text.dart';
@@ -10,6 +11,7 @@ import 'package:music_app/presentation/blocs/favorite_albums/bloc/favorite_album
 import 'package:music_app/presentation/widgets/album_widget.dart';
 import 'package:music_app/presentation/widgets/appbar_search_button.dart';
 import 'package:music_app/presentation/widgets/state_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TopAlbumPage extends StatefulWidget {
   TopAlbumPage({Key? key}) : super(key: key);
@@ -22,8 +24,10 @@ class _TopAlbumPageState extends State<TopAlbumPage> {
   Artist? artist;
   @override
   void didChangeDependencies() {
-    artist = ModalRoute.of(context)!.settings.arguments as Artist;
+    if (ModalRoute.of(context)!.settings.arguments != null)
+      artist = ModalRoute.of(context)!.settings.arguments as Artist;
 
+    artist = artist ?? ArtistModel(mbid: '1231', name: 'e31231');
     BlocProvider.of<TopAlbumsBloc>(context).getTopAlbumsEvent(artist!);
 
     super.didChangeDependencies();
@@ -45,6 +49,9 @@ class _TopAlbumPageState extends State<TopAlbumPage> {
             if (state.saveFailed ?? false) {
               BlocProvider.of<TopAlbumsBloc>(context)
                   .getTopAlbumsEvent(artist!);
+              Fluttertoast.showToast(
+                  msg: tr('error.unable_save_album',
+                      args: [state.album?.name ?? '']));
             }
           }
         },

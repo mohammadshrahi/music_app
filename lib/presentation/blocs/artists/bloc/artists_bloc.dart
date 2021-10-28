@@ -18,25 +18,28 @@ class ArtistsBloc extends Bloc<ArtistsEvent, ArtistsState> {
     on<ArtistsEvent>((event, emit) async {
       if (event is ArtistsSearchEvent) {
         _artistsSearchEvent(event);
-      } else if (event is ArtistsSearchResultEvent) {
-        _artistSearchResultEvent(event);
       }
     });
   }
   _artistsSearchEvent(ArtistsSearchEvent event) async {
     emit(ArtistSearchLoadingState());
     Resource res = await searchForArtist.call(params: event.params);
-    add(ArtistsSearchResultEvent(res));
-  }
-
-  _artistSearchResultEvent(ArtistsSearchResultEvent artistsSearchResultEvent) {
-    var res = artistsSearchResultEvent.resource;
     if (res is SuccessResource) {
       emit(ArtistSearchSucccssState(res.data));
     } else {
       emit(ArtistSearchFailedState(res as FailedResource));
     }
+    // add(ArtistsSearchResultEvent(res));
   }
+
+  // _artistSearchResultEvent(ArtistsSearchResultEvent artistsSearchResultEvent) {
+  //   var res = artistsSearchResultEvent.resource;
+  //   if (res is SuccessResource) {
+  //     emit(ArtistSearchSucccssState(res.data));
+  //   } else {
+  //     emit(ArtistSearchFailedState(res as FailedResource));
+  //   }
+  // }
 
   void addSearchForArtist(String artist) {
     add(ArtistsSearchEvent(SearchForArtistParams(artist)));

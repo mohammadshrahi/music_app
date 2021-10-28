@@ -1,10 +1,7 @@
 part of 'top_albums_bloc.dart';
 
-abstract class TopAlbumsState extends Equatable {
+abstract class TopAlbumsState {
   const TopAlbumsState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class TopAlbumsInitial extends TopAlbumsState implements Loadable {}

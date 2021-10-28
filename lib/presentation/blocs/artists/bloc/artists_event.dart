@@ -14,10 +14,10 @@ class ArtistsSearchEvent extends ArtistsEvent {
   List<Object> get props => [params.artist];
 }
 
-// ignore: must_be_immutable
-class ArtistsSearchResultEvent extends ArtistsEvent {
-  ArtistsSearchResultEvent(this.resource);
-  Resource resource;
-  @override
-  List<Object> get props => [];
-}
+// // ignore: must_be_immutable
+// class ArtistsSearchResultEvent extends ArtistsEvent {
+//   ArtistsSearchResultEvent(this.resource);
+//   Resource resource;
+//   @override
+//   List<Object> get props => [];
+// }
