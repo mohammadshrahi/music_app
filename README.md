@@ -13,7 +13,7 @@ A simple Music Flutter App.
 
 ## App demo
 
-![](music_app_demo.webm)
+![](app.gif)
 
 ## Dependancies
 - cupertino_icons: ^1.0.2
