@@ -22,9 +22,9 @@ import 'package:music_app/data/model/artist/get_top_albums_response.dart';
 void main() async {
   configureDependencies(Environment.prod);
   WidgetsFlutterBinding.ensureInitialized();
-  Directory? dir = await getExternalStorageDirectory();
+  Directory? dir = await getTemporaryDirectory();
 
-  Hive.init(dir?.path ?? '');
+  Hive.init(dir.path);
   Hive.registerAdapter<AlbumModel>(AlbumModelAdapter());
   Hive.registerAdapter<ArtistModel>(ArtistModelAdapter());
   Hive.registerAdapter<TrackModel>(TrackModelAdapter());

@@ -9,7 +9,7 @@ A simple Music Flutter App.
 - Widgets Testing
 - Hive(noSql Database)
 # Flutter Version
-2.5.2
+3.3.2
 
 ## App demo
 
